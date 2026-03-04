@@ -63,7 +63,7 @@ export const VibeCard: React.FC<VibeCardProps> = ({ app }) => {
                         className="vibe-button w-full uppercase"
                     >
                         Truy cập ngay
-                        <span className="material-icons text-lg">lock</span>
+                        <span className="material-icons text-lg">rocket_launch</span>
                     </a>
                 </div>
             </div>
