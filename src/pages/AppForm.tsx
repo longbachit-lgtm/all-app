@@ -35,24 +35,58 @@ export default function AppForm() {
     },
   });
 
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
   useEffect(() => {
     if (isEdit && id) {
       const app = getApp(id);
       if (app) {
         reset(app);
+        if (app.thumbnailUrl && !app.thumbnailUrl.startsWith('http')) {
+          // Handle legacy local data if any
+        }
       } else {
-        navigate('/');
+        navigate('/admin');
       }
     }
   }, [id, isEdit, getApp, reset, navigate]);
 
-  const onSubmit = (data: AppData) => {
-    if (isEdit) {
-      updateApp(data);
-    } else {
-      addApp({ ...data, id: crypto.randomUUID(), purchaseDate: new Date().toISOString().split('T')[0] });
+  const onSubmit = async (data: AppData) => {
+    try {
+      let finalThumbnailUrl = data.thumbnailUrl;
+
+      // If a new file was selected, upload it to Supabase Storage
+      if (selectedFile) {
+        try {
+          const { supabaseService } = await import('@/lib/supabase');
+          finalThumbnailUrl = await supabaseService.uploadThumbnail(selectedFile);
+        } catch (storageErr: any) {
+          console.error('Storage Error:', storageErr);
+          throw new Error(`Lỗi tải ảnh: ${storageErr.message || 'Hãy kiểm tra bucket "app-assets" đã là Public chưa.'}`);
+        }
+      }
+
+      try {
+        if (isEdit) {
+          await updateApp({ ...data, thumbnailUrl: finalThumbnailUrl });
+        } else {
+          await addApp({
+            ...data,
+            id: crypto.randomUUID(),
+            purchaseDate: new Date().toISOString().split('T')[0],
+            thumbnailUrl: finalThumbnailUrl
+          });
+        }
+      } catch (dbErr: any) {
+        console.error('Database Error:', dbErr);
+        throw new Error(`Lỗi lưu dữ liệu: ${dbErr.message || 'Hãy kiểm tra bảng "apps" đã được tạo và tắt RLS chưa.'}`);
+      }
+
+      navigate('/admin');
+    } catch (error: any) {
+      console.error('Error saving app:', error);
+      setUploadError(error.message || 'Không thể lưu ứng dụng. Vui lòng kiểm tra lại kết nối Supabase.');
     }
-    navigate('/admin');
   };
 
   const processFile = useCallback((file: File) => {
@@ -68,6 +102,10 @@ export default function AppForm() {
       );
       return;
     }
+
+    // Store the file object for uploading on submit
+    setSelectedFile(file);
+
     const reader = new FileReader();
     reader.onload = (e) => {
       const result = e.target?.result as string;

@@ -6,7 +6,15 @@ import { CATEGORIES } from '@/types';
 import { cn } from '@/lib/utils';
 
 export default function Dashboard({ isAdmin = false }: { isAdmin?: boolean }) {
-  const { apps, deleteApp } = useApps();
+  const { apps, deleteApp, isLoading } = useApps();
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
+      </div>
+    );
+  }
   const [searchParams, setSearchParams] = useSearchParams();
   const currentCategory = searchParams.get('category');
 

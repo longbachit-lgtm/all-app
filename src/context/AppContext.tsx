@@ -1,39 +1,83 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { INITIAL_APPS } from '@/data';
 import { AppData } from '@/types';
+import { supabaseService } from '@/lib/supabase';
 
 interface AppContextType {
   apps: AppData[];
-  addApp: (app: AppData) => void;
-  updateApp: (app: AppData) => void;
-  deleteApp: (id: string) => void;
+  isLoading: boolean;
+  addApp: (app: AppData) => Promise<void>;
+  updateApp: (app: AppData) => Promise<void>;
+  deleteApp: (id: string) => Promise<void>;
   getApp: (id: string) => AppData | undefined;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
-  const [apps, setApps] = useState<AppData[]>(() => {
-    const saved = localStorage.getItem('my-ai-apps');
-    return saved ? JSON.parse(saved) : INITIAL_APPS;
-  });
+  const [apps, setApps] = useState<AppData[]>(INITIAL_APPS);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    localStorage.setItem('my-ai-apps', JSON.stringify(apps));
-  }, [apps]);
+    const loadApps = async () => {
+      try {
+        const data = await supabaseService.fetchApps();
+        if (data && data.length > 0) {
+          setApps(data);
+        } else if (data && data.length === 0) {
+          // If database is empty, we could optionally seed it or just show empty
+          setApps([]);
+        }
+      } catch (error) {
+        console.error('Error loading apps from Supabase:', error);
+        // Fallback to localStorage if Supabase fails
+        const saved = localStorage.getItem('my-ai-apps');
+        if (saved) setApps(JSON.parse(saved));
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  const addApp = (app: AppData) => {
-    setApps((prev) => [...prev, app]);
+    loadApps();
+  }, []);
+
+  const addApp = async (app: AppData) => {
+    try {
+      await supabaseService.addApp(app);
+      setApps((prev) => [app, ...prev]);
+    } catch (error) {
+      console.error('Error adding app:', error);
+      // Local fallback
+      setApps((prev) => [app, ...prev]);
+      localStorage.setItem('my-ai-apps', JSON.stringify([app, ...apps]));
+      throw error; // Re-throw to inform the component
+    }
   };
 
-  const updateApp = (updatedApp: AppData) => {
-    setApps((prev) =>
-      prev.map((app) => (app.id === updatedApp.id ? updatedApp : app))
-    );
+  const updateApp = async (updatedApp: AppData) => {
+    try {
+      await supabaseService.updateApp(updatedApp);
+      setApps((prev) =>
+        prev.map((app) => (app.id === updatedApp.id ? updatedApp : app))
+      );
+    } catch (error) {
+      console.error('Error updating app:', error);
+      setApps((prev) =>
+        prev.map((app) => (app.id === updatedApp.id ? updatedApp : app))
+      );
+      throw error; // Re-throw
+    }
   };
 
-  const deleteApp = (id: string) => {
-    setApps((prev) => prev.filter((app) => app.id !== id));
+  const deleteApp = async (id: string) => {
+    try {
+      await supabaseService.deleteApp(id);
+      setApps((prev) => prev.filter((app) => app.id !== id));
+    } catch (error) {
+      console.error('Error deleting app:', error);
+      setApps((prev) => prev.filter((app) => app.id !== id));
+      throw error; // Re-throw
+    }
   };
 
   const getApp = (id: string) => {
@@ -41,7 +85,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AppContext.Provider value={{ apps, addApp, updateApp, deleteApp, getApp }}>
+    <AppContext.Provider value={{ apps, isLoading, addApp, updateApp, deleteApp, getApp }}>
       {children}
     </AppContext.Provider>
   );
