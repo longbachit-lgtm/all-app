@@ -124,17 +124,17 @@ export default function AppForm() {
       <div className="mb-6 flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm">
         <Link to="/" className="hover:text-orange-500 transition-colors flex items-center gap-1">
           <span className="material-icons text-base">arrow_back</span>
-          Back to list
+          Quay lại danh sách
         </Link>
       </div>
 
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
         <div className="p-6 md:p-8 border-b border-slate-100 dark:border-slate-700">
           <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-            {isEdit ? 'Edit Application' : 'Add New Application'}
+            {isEdit ? 'Chỉnh sửa ứng dụng' : 'Thêm ứng dụng mới'}
           </h1>
           <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm">
-            Fill in the details to add a new AI tool to your app store.
+            Điền thông tin chi tiết để thêm công cụ AI mới vào cửa hàng của bạn.
           </p>
         </div>
 
@@ -143,11 +143,11 @@ export default function AppForm() {
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-slate-900 dark:text-slate-100 mb-2">
-                  App Name <span className="text-red-500">*</span>
+                  Tên ứng dụng <span className="text-red-500">*</span>
                 </label>
                 <Input
-                  {...register('name', { required: 'App name is required' })}
-                  placeholder="e.g. LuxFit AI Studio"
+                  {...register('name', { required: 'Tên ứng dụng là bắt buộc' })}
+                  placeholder="Ví dụ: LuxFit AI Studio"
                 />
                 {errors.name && (
                   <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
@@ -156,7 +156,7 @@ export default function AppForm() {
 
               <div>
                 <label className="block text-sm font-medium text-slate-900 dark:text-slate-100 mb-2">
-                  Category <span className="text-red-500">*</span>
+                  Danh mục <span className="text-red-500">*</span>
                 </label>
                 <select
                   {...register('category', { required: 'Category is required' })}
@@ -172,28 +172,28 @@ export default function AppForm() {
 
               <div>
                 <label className="block text-sm font-medium text-slate-900 dark:text-slate-100 mb-2">
-                  License Type <span className="text-red-500">*</span>
+                  Loại bản quyền <span className="text-red-500">*</span>
                 </label>
                 <select
                   {...register('licenseType', { required: 'License type is required' })}
                   className="flex h-11 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-950 dark:ring-offset-slate-950 dark:placeholder:text-slate-400"
                 >
-                  <option value="Lifetime">Lifetime</option>
-                  <option value="Subscription">Subscription</option>
-                  <option value="Free">Free</option>
+                  <option value="Lifetime">Trọn đời</option>
+                  <option value="Subscription">Đăng ký</option>
+                  <option value="Free">Miễn phí</option>
                 </select>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-slate-900 dark:text-slate-100 mb-2">
-                  Access Link <span className="text-red-500">*</span>
+                  Liên kết truy cập <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 material-icons text-slate-400 text-lg">
                     link
                   </span>
                   <Input
-                    {...register('accessLink', { required: 'Access link is required' })}
+                    {...register('accessLink', { required: 'Liên kết truy cập là bắt buộc' })}
                     className="pl-10"
                     placeholder="https://example.com/app"
                   />
@@ -206,7 +206,7 @@ export default function AppForm() {
 
             <div>
               <label className="block text-sm font-medium text-slate-900 dark:text-slate-100 mb-2">
-                Thumbnail
+                Ảnh đại diện
               </label>
 
               {/* Tab switcher */}
@@ -214,11 +214,10 @@ export default function AppForm() {
                 <button
                   type="button"
                   onClick={() => setThumbMode('upload')}
-                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all flex items-center gap-1.5 ${
-                    thumbMode === 'upload'
+                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all flex items-center gap-1.5 ${thumbMode === 'upload'
                       ? 'bg-white dark:bg-slate-800 text-orange-500 shadow-sm'
                       : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
-                  }`}
+                    }`}
                 >
                   <span className="material-icons text-sm">upload</span>
                   Upload File
@@ -226,11 +225,10 @@ export default function AppForm() {
                 <button
                   type="button"
                   onClick={() => setThumbMode('url')}
-                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all flex items-center gap-1.5 ${
-                    thumbMode === 'url'
+                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all flex items-center gap-1.5 ${thumbMode === 'url'
                       ? 'bg-white dark:bg-slate-800 text-orange-500 shadow-sm'
                       : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
-                  }`}
+                    }`}
                 >
                   <span className="material-icons text-sm">link</span>
                   Paste URL
@@ -313,7 +311,7 @@ export default function AppForm() {
                       placeholder="https://example.com/image.png"
                       className="text-center bg-white/80 dark:bg-slate-900/80"
                     />
-                    <p className="text-xs text-slate-400">Paste a direct image link (PNG, JPG, GIF)</p>
+                    <p className="text-xs text-slate-400">Dán trực tiếp liên kết ảnh (PNG, JPG, GIF)</p>
                   </div>
                 </div>
               )}
@@ -332,25 +330,25 @@ export default function AppForm() {
                   className="mt-2 text-xs text-red-400 hover:text-red-600 flex items-center gap-1 transition-colors"
                 >
                   <span className="material-icons text-sm">delete</span>
-                  Remove thumbnail
+                  Xóa ảnh đại diện
                 </button>
               )}
 
               <p className="text-xs text-slate-400 dark:text-slate-500 mt-2">
-                Recommended size: 1200x630px for best display.
+                Kích thước khuyến nghị: 1200x630px để hiển thị tốt nhất.
               </p>
             </div>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-slate-900 dark:text-slate-100 mb-2">
-              Description
+              Mô tả
             </label>
             <textarea
               {...register('description')}
               rows={4}
               className="flex w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-950 dark:ring-offset-slate-950 dark:placeholder:text-slate-400 resize-none"
-              placeholder="Describe the main functions of this AI app..."
+              placeholder="Mô tả các chức năng chính của ứng dụng AI này..."
             />
           </div>
 
@@ -363,10 +361,10 @@ export default function AppForm() {
               </div>
               <div>
                 <h4 className="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                  Copyright Status
+                  Trạng thái bản quyền
                 </h4>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                  Default is Lifetime
+                  Mặc định là Trọn đời
                 </p>
               </div>
             </div>
@@ -379,7 +377,7 @@ export default function AppForm() {
                 />
                 <div className="relative w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-green-500"></div>
                 <span className="ms-3 text-sm font-medium text-slate-900 dark:text-slate-300">
-                  Activated
+                  Đã kích hoạt
                 </span>
               </label>
             </div>
@@ -392,11 +390,11 @@ export default function AppForm() {
               onClick={() => navigate('/')}
               className="w-full md:w-auto"
             >
-              Cancel
+              Hủy
             </Button>
             <Button type="submit" className="w-full md:w-auto flex-1 gap-2">
               <span className="material-icons text-lg">save</span>
-              Save Application
+              Lưu ứng dụng
             </Button>
           </div>
         </form>

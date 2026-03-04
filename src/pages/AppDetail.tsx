@@ -11,8 +11,8 @@ export default function AppDetail() {
   if (!app) {
     return (
       <div className="flex flex-col items-center justify-center h-full">
-        <h2 className="text-2xl font-bold mb-4">App not found</h2>
-        <Button onClick={() => navigate('/')}>Go Home</Button>
+        <h2 className="text-2xl font-bold mb-4">Không tìm thấy ứng dụng</h2>
+        <Button onClick={() => navigate('/')}>Quay lại Trang chủ</Button>
       </div>
     );
   }
@@ -25,7 +25,7 @@ export default function AppDetail() {
           className="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-orange-500 transition-colors"
         >
           <span className="material-icons text-lg">arrow_back</span>
-          Back to list
+          Quay lại danh sách
         </Link>
       </div>
 
@@ -44,7 +44,7 @@ export default function AppDetail() {
 
           <div className="w-full lg:w-7/12 flex flex-col">
             <div className="flex items-center gap-3 mb-4">
-              <Link 
+              <Link
                 to={`/?category=${encodeURIComponent(app.category)}`}
                 className="px-3 py-1 rounded-md bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-xs font-semibold border border-orange-100 dark:border-orange-800 hover:bg-orange-100 dark:hover:bg-orange-900/50 transition-colors"
               >
@@ -53,7 +53,7 @@ export default function AppDetail() {
               {app.isOwned && (
                 <span className="px-3 py-1 rounded-md bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-semibold border border-green-100 dark:border-green-800 flex items-center gap-1">
                   <span className="material-icons text-[14px]">check_circle</span>
-                  Owned
+                  Đã sở hữu
                 </span>
               )}
             </div>
@@ -70,12 +70,12 @@ export default function AppDetail() {
               <div className="bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700 p-4 flex flex-wrap gap-y-3 gap-x-8">
                 <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
                   <span className="material-icons text-[18px]">calendar_today</span>
-                  <span>Purchased: {app.purchaseDate}</span>
+                  <span>Ngày mua: {app.purchaseDate}</span>
                 </div>
                 <div className="w-px h-5 bg-slate-200 dark:border-slate-700 hidden sm:block"></div>
                 <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
                   <span className="material-icons text-[18px]">verified_user</span>
-                  <span>License: {app.licenseType}</span>
+                  <span>Bản quyền: {app.licenseType}</span>
                 </div>
               </div>
             </div>
@@ -88,10 +88,10 @@ export default function AppDetail() {
           <div>
             <div className="flex items-center gap-2 mb-4 text-slate-900 dark:text-slate-100">
               <span className="material-icons text-orange-500">open_in_new</span>
-              <h3 className="font-bold text-lg">Access Application</h3>
+              <h3 className="font-bold text-lg">Truy cập ứng dụng</h3>
             </div>
             <p className="text-sm text-slate-500 dark:text-slate-400 mb-6 leading-relaxed">
-              Click the button below to open the application in a new tab. The system will automatically log you in to your Premium account.
+              Nhấp vào nút bên dưới để mở ứng dụng trong tab mới. Hệ thống sẽ tự động đăng nhập vào tài khoản Premium của bạn.
             </p>
             <a
               href={app.accessLink}
@@ -100,7 +100,7 @@ export default function AppDetail() {
               className="block w-full"
             >
               <Button className="w-full py-4 h-auto text-base font-bold uppercase tracking-wide shadow-lg shadow-orange-500/30">
-                Access App Link
+                Truy cập liên kết ứng dụng
                 <span className="material-icons ml-2">login</span>
               </Button>
             </a>
@@ -109,15 +109,15 @@ export default function AppDetail() {
           <div>
             <div className="h-full border border-slate-200 dark:border-slate-700 rounded-xl p-6 bg-white dark:bg-slate-800/30">
               <h3 className="font-bold text-lg text-slate-900 dark:text-slate-100 mb-4 pb-4 border-b border-slate-100 dark:border-slate-700">
-                User Guide
+                Hướng dẫn sử dụng
               </h3>
               <div className="text-sm text-slate-500 dark:text-slate-400 space-y-4">
                 <p>
-                  There is currently no detailed guide for this application. Please contact support if you need help.
+                  Hiện tại không có hướng dẫn chi tiết cho ứng dụng này. Vui lòng liên hệ bộ phận hỗ trợ nếu bạn cần giúp đỡ.
                 </p>
                 <div className="flex items-center gap-2 text-orange-500 cursor-pointer hover:underline text-xs font-medium">
                   <span className="material-icons text-[16px]">help_outline</span>
-                  Contact Support
+                  Liên hệ Hỗ trợ
                 </div>
               </div>
             </div>

@@ -27,16 +27,16 @@ export default function Dashboard() {
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-100 mb-2">
-            My Application Store
+            Cửa hàng ứng dụng của tôi
           </h1>
           <p className="text-slate-500 dark:text-slate-400 text-sm">
-            Manage and access the AI tools you own.
+            Quản lý và truy cập các công cụ AI bạn sở hữu.
           </p>
         </div>
         <Link to="/add">
           <Button className="gap-2">
             <span className="material-icons">add</span>
-            Add New App
+            Thêm ứng dụng mới
           </Button>
         </Link>
       </header>
@@ -51,7 +51,7 @@ export default function Dashboard() {
               : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-100 dark:border-slate-700"
           )}
         >
-          All
+          Tất cả
         </button>
         {CATEGORIES.map((cat) => (
           <button
@@ -78,9 +78,9 @@ export default function Dashboard() {
       ) : (
         <div className="flex flex-col items-center justify-center py-20 text-slate-500">
           <span className="material-icons text-6xl mb-4 opacity-20">search_off</span>
-          <p className="text-lg font-medium">No applications found in this category.</p>
+          <p className="text-lg font-medium">Không tìm thấy ứng dụng nào trong danh mục này.</p>
           <Button variant="ghost" onClick={() => handleCategoryClick(null)} className="mt-2">
-            Clear filter
+            Xóa bộ lọc
           </Button>
         </div>
       )}

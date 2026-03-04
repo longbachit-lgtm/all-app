@@ -11,8 +11,8 @@ export interface AppData {
 }
 
 export const CATEGORIES = [
-  { value: 'image-gen', label: 'Image Gen' },
-  { value: 'text-gen', label: 'Text Gen' },
-  { value: 'video-gen', label: 'Video Gen' },
-  { value: 'audio-gen', label: 'Audio Gen' },
+  { value: 'image-gen', label: 'Tạo Ảnh' },
+  { value: 'text-gen', label: 'Tạo Văn Bản' },
+  { value: 'video-gen', label: 'Tạo Video' },
+  { value: 'audio-gen', label: 'Tạo Âm Thanh' },
 ];

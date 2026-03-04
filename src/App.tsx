@@ -25,8 +25,8 @@ export default function App() {
             <Route path="add" element={<AppForm />} />
             <Route path="edit/:id" element={<AppForm />} />
             <Route path="app/:id" element={<AppDetail />} />
-            <Route path="history" element={<PlaceholderPage title="Transaction History" />} />
-            <Route path="account" element={<PlaceholderPage title="Account Info" />} />
+            <Route path="history" element={<PlaceholderPage title="Lịch sử giao dịch" />} />
+            <Route path="account" element={<PlaceholderPage title="Thông tin tài khoản" />} />
           </Route>
         </Routes>
       </Router>

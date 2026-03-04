@@ -24,61 +24,61 @@ export function Sidebar() {
             </p>
           </div>
         </div>
-        
+
         <div className="border-t border-slate-100 dark:border-slate-700 my-2"></div>
-        
+
         <nav className="flex-1 mt-4 space-y-2">
           <p className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3 px-3">
-            Main Menu
+            Menu chính
           </p>
-          
+
           <Link
             to="/"
             className={cn(
               "flex items-center gap-3 px-3 py-3 rounded-xl transition-all",
-              isActive('/') 
-                ? "bg-orange-500 text-white shadow-md shadow-orange-200 dark:shadow-none hover:scale-[1.02]" 
+              isActive('/')
+                ? "bg-orange-500 text-white shadow-md shadow-orange-200 dark:shadow-none hover:scale-[1.02]"
                 : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700"
             )}
           >
             <span className="material-icons text-xl">grid_view</span>
-            <span className="font-medium text-sm">My Applications</span>
+            <span className="font-medium text-sm">Ứng dụng của tôi</span>
           </Link>
-          
+
           <Link
             to="/history"
             className={cn(
               "flex items-center gap-3 px-3 py-3 rounded-xl transition-all",
-              isActive('/history') 
-                ? "bg-orange-500 text-white shadow-md shadow-orange-200 dark:shadow-none hover:scale-[1.02]" 
+              isActive('/history')
+                ? "bg-orange-500 text-white shadow-md shadow-orange-200 dark:shadow-none hover:scale-[1.02]"
                 : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700"
             )}
           >
             <span className="material-icons text-xl">history</span>
-            <span className="font-medium text-sm">Transaction History</span>
+            <span className="font-medium text-sm">Lịch sử giao dịch</span>
           </Link>
-          
+
           <Link
             to="/account"
             className={cn(
               "flex items-center gap-3 px-3 py-3 rounded-xl transition-all",
-              isActive('/account') 
-                ? "bg-orange-500 text-white shadow-md shadow-orange-200 dark:shadow-none hover:scale-[1.02]" 
+              isActive('/account')
+                ? "bg-orange-500 text-white shadow-md shadow-orange-200 dark:shadow-none hover:scale-[1.02]"
                 : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700"
             )}
           >
             <span className="material-icons text-xl">account_circle</span>
-            <span className="font-medium text-sm">Account Info</span>
+            <span className="font-medium text-sm">Thông tin tài khoản</span>
           </Link>
         </nav>
-        
+
         <div className="mt-auto pt-6 border-t border-slate-100 dark:border-slate-700">
           <Link
             to="/"
             className="flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-orange-500 dark:hover:text-orange-500 transition-colors text-sm font-medium px-3"
           >
             <span className="material-icons text-lg">arrow_back</span>
-            Back to Home
+            Quay lại Trang chủ
           </Link>
         </div>
       </div>
