@@ -1,5 +1,28 @@
 @import "tailwindcss";
 
+@layer base {
+  body {
+    @apply bg-[#f8f9fa] dark:bg-slate-950;
+    background-image: radial-gradient(#dee2e6 1px, transparent 1px);
+    background-size: 20px 20px;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  .vibe-card {
+    @apply bg-white dark:bg-slate-900 border-[3px] border-black rounded-none shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)];
+  }
+  
+  .vibe-badge {
+    @apply absolute top-[-10px] right-[-10px] bg-blue-600 text-white px-3 py-1 text-[10px] font-black uppercase tracking-tighter border-2 border-black rotate-3 z-20;
+  }
+
+  .vibe-button {
+    @apply bg-[#4ade80] hover:bg-[#22c55e] text-black font-black py-2 px-4 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all flex items-center justify-center gap-2;
+  }
+}
+
 .material-icons,
 .material-icons-round,
 .material-icons-outlined {

@@ -6,9 +6,10 @@ import { Button } from './ui/Button';
 interface AppCardProps {
   app: AppData;
   onDelete: (id: string) => void;
+  isAdmin?: boolean;
 }
 
-export const AppCard: React.FC<AppCardProps> = ({ app, onDelete }) => {
+export const AppCard: React.FC<AppCardProps> = ({ app, onDelete, isAdmin = false }) => {
   return (
     <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-lg dark:hover:bg-slate-800 transition-all duration-300 flex flex-col group overflow-hidden relative">
       <div className="relative h-48 bg-gradient-to-br from-orange-400 to-orange-600 p-4 flex items-center justify-center overflow-hidden">
@@ -18,24 +19,26 @@ export const AppCard: React.FC<AppCardProps> = ({ app, onDelete }) => {
           </div>
         )}
 
-        <div className="absolute top-3 right-3 flex gap-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
-          <Link to={`/edit/${app.id}`}>
-            <button className="p-2 bg-white/90 dark:bg-black/50 rounded-full hover:bg-white text-slate-700 hover:text-orange-500 transition-colors">
-              <span className="material-icons text-sm">edit</span>
+        {isAdmin && (
+          <div className="absolute top-3 right-3 flex gap-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+            <Link to={`/admin/edit/${app.id}`}>
+              <button className="p-2 bg-white/90 dark:bg-black/50 rounded-full hover:bg-white text-slate-700 hover:text-orange-500 transition-colors">
+                <span className="material-icons text-sm">edit</span>
+              </button>
+            </Link>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                if (confirm('Bạn có chắc chắn muốn xóa ứng dụng này không?')) {
+                  onDelete(app.id);
+                }
+              }}
+              className="p-2 bg-white/90 dark:bg-black/50 rounded-full hover:bg-white text-slate-700 hover:text-red-500 transition-colors"
+            >
+              <span className="material-icons text-sm">delete</span>
             </button>
-          </Link>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              if (confirm('Bạn có chắc chắn muốn xóa ứng dụng này không?')) {
-                onDelete(app.id);
-              }
-            }}
-            className="p-2 bg-white/90 dark:bg-black/50 rounded-full hover:bg-white text-slate-700 hover:text-red-500 transition-colors"
-          >
-            <span className="material-icons text-sm">delete</span>
-          </button>
-        </div>
+          </div>
+        )}
 
         <img
           alt={app.name}

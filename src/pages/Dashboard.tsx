@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/Button';
 import { CATEGORIES } from '@/types';
 import { cn } from '@/lib/utils';
 
-export default function Dashboard() {
+export default function Dashboard({ isAdmin = false }: { isAdmin?: boolean }) {
   const { apps, deleteApp } = useApps();
   const [searchParams, setSearchParams] = useSearchParams();
   const currentCategory = searchParams.get('category');
@@ -27,18 +27,20 @@ export default function Dashboard() {
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-100 mb-2">
-            Cửa hàng ứng dụng của tôi
+            {isAdmin ? 'Quản lý ứng dụng (Admin)' : 'Cửa hàng ứng dụng của tôi'}
           </h1>
           <p className="text-slate-500 dark:text-slate-400 text-sm">
-            Quản lý và truy cập các công cụ AI bạn sở hữu.
+            {isAdmin ? 'Thêm, sửa hoặc xóa các ứng dụng trong hệ thống.' : 'Quản lý và truy cập các công cụ AI bạn sở hữu.'}
           </p>
         </div>
-        <Link to="/add">
-          <Button className="gap-2">
-            <span className="material-icons">add</span>
-            Thêm ứng dụng mới
-          </Button>
-        </Link>
+        {isAdmin && (
+          <Link to="/admin/add">
+            <Button className="gap-2">
+              <span className="material-icons">add</span>
+              Thêm ứng dụng mới
+            </Button>
+          </Link>
+        )}
       </header>
 
       <div className="flex flex-wrap gap-2 pb-2">
@@ -72,7 +74,7 @@ export default function Dashboard() {
       {filteredApps.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {filteredApps.map((app) => (
-            <AppCard key={app.id} app={app} onDelete={deleteApp} />
+            <AppCard key={app.id} app={app} onDelete={deleteApp} isAdmin={isAdmin} />
           ))}
         </div>
       ) : (

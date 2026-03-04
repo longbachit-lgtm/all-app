@@ -52,7 +52,7 @@ export default function AppForm() {
     } else {
       addApp({ ...data, id: crypto.randomUUID(), purchaseDate: new Date().toISOString().split('T')[0] });
     }
-    navigate('/');
+    navigate('/admin');
   };
 
   const processFile = useCallback((file: File) => {
@@ -122,7 +122,7 @@ export default function AppForm() {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-6 flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm">
-        <Link to="/" className="hover:text-orange-500 transition-colors flex items-center gap-1">
+        <Link to="/admin" className="hover:text-orange-500 transition-colors flex items-center gap-1">
           <span className="material-icons text-base">arrow_back</span>
           Quay lại danh sách
         </Link>
@@ -215,8 +215,8 @@ export default function AppForm() {
                   type="button"
                   onClick={() => setThumbMode('upload')}
                   className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all flex items-center gap-1.5 ${thumbMode === 'upload'
-                      ? 'bg-white dark:bg-slate-800 text-orange-500 shadow-sm'
-                      : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
+                    ? 'bg-white dark:bg-slate-800 text-orange-500 shadow-sm'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
                     }`}
                 >
                   <span className="material-icons text-sm">upload</span>
@@ -226,8 +226,8 @@ export default function AppForm() {
                   type="button"
                   onClick={() => setThumbMode('url')}
                   className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all flex items-center gap-1.5 ${thumbMode === 'url'
-                      ? 'bg-white dark:bg-slate-800 text-orange-500 shadow-sm'
-                      : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
+                    ? 'bg-white dark:bg-slate-800 text-orange-500 shadow-sm'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
                     }`}
                 >
                   <span className="material-icons text-sm">link</span>
@@ -387,7 +387,7 @@ export default function AppForm() {
             <Button
               type="button"
               variant="outline"
-              onClick={() => navigate('/')}
+              onClick={() => navigate('/admin')}
               className="w-full md:w-auto"
             >
               Hủy

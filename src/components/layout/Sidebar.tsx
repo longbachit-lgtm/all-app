@@ -70,6 +70,19 @@ export function Sidebar() {
             <span className="material-icons text-xl">account_circle</span>
             <span className="font-medium text-sm">Thông tin tài khoản</span>
           </Link>
+
+          <Link
+            to="/admin"
+            className={cn(
+              "flex items-center gap-3 px-3 py-3 rounded-xl transition-all",
+              isActive('/admin')
+                ? "bg-slate-800 text-white shadow-md dark:bg-orange-500 hover:scale-[1.02]"
+                : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700"
+            )}
+          >
+            <span className="material-icons text-xl">admin_panel_settings</span>
+            <span className="font-medium text-sm">Quản lý Admin</span>
+          </Link>
         </nav>
 
         <div className="mt-auto pt-6 border-t border-slate-100 dark:border-slate-700">
