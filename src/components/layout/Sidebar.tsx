@@ -1,10 +1,18 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/context/AuthContext';
 
 export function Sidebar() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { logout, user } = useAuth();
 
   const isActive = (path: string) => location.pathname === path;
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   return (
     <aside className="w-full md:w-72 flex-shrink-0">
@@ -17,7 +25,7 @@ export function Sidebar() {
           />
           <div className="overflow-hidden">
             <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm truncate uppercase tracking-wider text-orange-600">
-              Admin
+              {user || 'Admin'}
             </h3>
           </div>
         </div>
@@ -56,7 +64,7 @@ export function Sidebar() {
           </Link>
         </nav>
 
-        <div className="mt-auto pt-6 border-t border-slate-100 dark:border-slate-700">
+        <div className="mt-auto pt-6 space-y-4 border-t border-slate-100 dark:border-slate-700">
           <Link
             to="/"
             className="flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-orange-500 dark:hover:text-orange-500 transition-colors text-sm font-medium px-3"
@@ -64,6 +72,14 @@ export function Sidebar() {
             <span className="material-icons text-lg">arrow_back</span>
             Quay lại Trang chủ
           </Link>
+
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center gap-2 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all text-sm font-semibold px-3 py-2 rounded-lg"
+          >
+            <span className="material-icons text-lg">logout</span>
+            Đăng xuất
+          </button>
         </div>
       </div>
     </aside>
